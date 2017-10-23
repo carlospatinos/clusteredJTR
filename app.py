@@ -53,7 +53,7 @@ class ExecuteApp(Resource):
         """An addition endpoint."""
         #jsonify({'tasks': tasks})
         print subprocess.check_output(['./johnFake.py', '-p', passwordFile, '-c', config, '-t', executionType, '-g', charsetGroup])
-        return {'john': passwordFile}
+        return {'status': "running"}
 
 class StatusResource(Resource):
     def post(self):
@@ -61,10 +61,10 @@ class StatusResource(Resource):
 
 class ResultsResource(Resource):
     def post(self):
-        return {'john': "running"}
+        return {'cracked': "5 out of 5"}
 
 class AvailableCPUsResource(Resource):
-    def post(self):
+    def get(self):
         return {'cores': multiprocessing.cpu_count()}
 
 # This error handler is necessary for usage with Flask-RESTful
